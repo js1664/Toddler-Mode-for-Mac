@@ -3,12 +3,14 @@ import SwiftUI
 /// Settings view shown before locking. Allows configuration of mode, shortcut, password.
 struct SettingsView: View {
     @State private var selectedMode: PlayModeType = SettingsStore.shared.selectedMode
+    @State private var exitKeyCode: UInt16 = SettingsStore.shared.exitKeyCode
+    @State private var exitModifiers: CGEventFlags = SettingsStore.shared.exitModifiers
     @State private var passwordEnabled: Bool = SettingsStore.shared.passwordEnabled
-    @State private var password: String = SettingsStore.shared.password
+    @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @State private var soundEnabled: Bool = SettingsStore.shared.soundEnabled
     @State private var showPasswordError: Bool = false
-    @State private var permissionGranted: Bool = false
+    @State private var passwordErrorMessage: String = ""
 
     let permissionChecker = PermissionChecker()
     var onLockNow: (() -> Void)?
@@ -39,16 +41,9 @@ struct SettingsView: View {
 
                 // Exit Shortcut
                 Section("Exit Shortcut") {
-                    HStack {
-                        Text("Shortcut:")
-                        Spacer()
-                        Text(shortcutDisplayString())
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(6)
-                    }
-                    Text("Press this key combination to exit lock mode")
+                    ShortcutRecorderView(keyCode: $exitKeyCode, modifiers: $exitModifiers)
+                        .frame(height: 30)
+                    Text("Click Record, then press your desired shortcut (requires 2+ modifiers)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -61,7 +56,7 @@ struct SettingsView: View {
                         SecureField("Password", text: $password)
                         SecureField("Confirm Password", text: $confirmPassword)
                         if showPasswordError {
-                            Text("Passwords don't match")
+                            Text(passwordErrorMessage)
                                 .font(.caption)
                                 .foregroundColor(.red)
                         }
@@ -75,20 +70,6 @@ struct SettingsView: View {
 
                 // Permissions
                 Section("Permissions") {
-                    HStack {
-                        Image(systemName: permissionChecker.hasInputMonitoring ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                            .foregroundColor(permissionChecker.hasInputMonitoring ? .green : .orange)
-                        Text("Input Monitoring")
-                        Spacer()
-                        if !permissionChecker.hasInputMonitoring {
-                            Button("Grant") {
-                                permissionChecker.requestInputMonitoring()
-                                permissionChecker.openInputMonitoringSettings()
-                            }
-                        } else {
-                            Text("Granted").foregroundColor(.secondary)
-                        }
-                    }
                     HStack {
                         Image(systemName: permissionChecker.hasAccessibility ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                             .foregroundColor(permissionChecker.hasAccessibility ? .green : .orange)
@@ -129,55 +110,32 @@ struct SettingsView: View {
             }
             .padding(20)
         }
-        .frame(width: 500, height: 620)
-        .onAppear {
-            checkPermissions()
-            // Poll permissions every 2 seconds
-            Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-                checkPermissions()
-            }
-        }
-    }
-
-    private func checkPermissions() {
-        permissionGranted = permissionChecker.allPermissionsGranted
+        .frame(width: 500, height: 650)
     }
 
     private func lockNow() {
         // Save settings
         SettingsStore.shared.selectedMode = selectedMode
         SettingsStore.shared.soundEnabled = soundEnabled
+        SettingsStore.shared.exitKeyCode = exitKeyCode
+        SettingsStore.shared.exitModifiers = exitModifiers
         SettingsStore.shared.passwordEnabled = passwordEnabled
 
         if passwordEnabled {
-            guard password == confirmPassword, !password.isEmpty else {
+            guard !password.isEmpty else {
                 showPasswordError = true
+                passwordErrorMessage = "Password cannot be empty"
                 return
             }
-            SettingsStore.shared.password = password
+            guard password == confirmPassword else {
+                showPasswordError = true
+                passwordErrorMessage = "Passwords don't match"
+                return
+            }
+            KeychainManager.savePassword(password)
         }
 
         showPasswordError = false
         onLockNow?()
-    }
-
-    private func shortcutDisplayString() -> String {
-        let store = SettingsStore.shared
-        var parts: [String] = []
-        let mods = store.exitModifiers
-        if mods.contains(.maskCommand) { parts.append("\u{2318}") }
-        if mods.contains(.maskShift) { parts.append("\u{21E7}") }
-        if mods.contains(.maskControl) { parts.append("\u{2303}") }
-        if mods.contains(.maskAlternate) { parts.append("\u{2325}") }
-
-        // Key name
-        switch store.exitKeyCode {
-        case 53: parts.append("Esc")
-        case 36: parts.append("Return")
-        case 49: parts.append("Space")
-        default: parts.append("Key \(store.exitKeyCode)")
-        }
-
-        return parts.joined(separator: "")
     }
 }

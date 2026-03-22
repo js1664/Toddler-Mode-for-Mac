@@ -25,8 +25,12 @@ sources = [
     ("LockScreen/PasswordOverlayView.swift", "PasswordOverlayView.swift"),
     ("Effects/SoundManager.swift", "SoundManager.swift"),
     ("Modes/FreePlayMode.swift", "FreePlayMode.swift"),
+    ("Modes/GameMode.swift", "GameMode.swift"),
+    ("Modes/CharacterMode.swift", "CharacterMode.swift"),
     ("Modes/ModeProtocol.swift", "ModeProtocol.swift"),
     ("Permissions/PermissionChecker.swift", "PermissionChecker.swift"),
+    ("Settings/KeychainManager.swift", "KeychainManager.swift"),
+    ("Settings/ShortcutRecorderView.swift", "ShortcutRecorderView.swift"),
     ("Settings/SettingsStore.swift", "SettingsStore.swift"),
     ("Settings/SettingsView.swift", "SettingsView.swift"),
 ]
@@ -49,9 +53,9 @@ groups = {
         "LockScreen/LockWindowController.swift",
         "LockScreen/PasswordOverlayView.swift",
     ],
-    "Modes": ["Modes/FreePlayMode.swift", "Modes/ModeProtocol.swift"],
+    "Modes": ["Modes/FreePlayMode.swift", "Modes/GameMode.swift", "Modes/CharacterMode.swift", "Modes/ModeProtocol.swift"],
     "Permissions": ["Permissions/PermissionChecker.swift"],
-    "Settings": ["Settings/SettingsStore.swift", "Settings/SettingsView.swift"],
+    "Settings": ["Settings/KeychainManager.swift", "Settings/ShortcutRecorderView.swift", "Settings/SettingsStore.swift", "Settings/SettingsView.swift"],
 }
 
 # IDs
