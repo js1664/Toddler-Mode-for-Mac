@@ -37,7 +37,7 @@ final class LockViewController: NSViewController {
         let mode: PlayMode
         switch currentMode {
         case .freePlay:
-            mode = FreePlayMode(size: size)
+            mode = FreePlayMode(size: size, characterSet: SettingsStore.shared.characterSet)
         case .game:
             mode = GameMode(size: size)
         case .character:

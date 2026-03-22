@@ -32,6 +32,20 @@ final class SoundManager {
     /// Pop sound for shape/bubble interactions
     private let popFrequencies: [Float] = [880.0, 1108.73, 1318.51]
 
+    /// Background music melody — a gentle repeating pattern in C major pentatonic
+    private let melodyPattern: [Float] = [
+        261.63, 329.63, 392.00, 329.63, 440.00, 392.00, 329.63, 261.63,
+        293.66, 392.00, 440.00, 392.00, 523.25, 440.00, 392.00, 293.66,
+        329.63, 440.00, 523.25, 440.00, 392.00, 329.63, 293.66, 261.63,
+    ]
+
+    /// Whether background music is currently playing
+    private var isMusicPlaying = false
+    private var musicPlayerNode: AVAudioPlayerNode?
+
+    /// Whether background music is enabled
+    var musicEnabled: Bool = false
+
     private init() {
         // Defer engine setup until first use to avoid crash at launch
     }
@@ -89,6 +103,74 @@ final class SoundManager {
         guard isRunning else { return }
 
         playTone(frequency: 600, duration: 0.15, volume: 0.15, decay: true)
+    }
+
+    // MARK: - Background Music
+
+    /// Start looping background music.
+    func startMusic() {
+        guard musicEnabled, !isMusicPlaying else { return }
+        ensureEngine()
+        guard isRunning, let engine = engine else { return }
+
+        let sampleRate: Float = 44100.0
+        let noteLength: Float = 0.4  // seconds per note
+        let totalNotes = melodyPattern.count
+        let totalSamples = Int(sampleRate * noteLength) * totalNotes
+
+        guard let buffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: AVAudioFrameCount(totalSamples)) else { return }
+        buffer.frameLength = AVAudioFrameCount(totalSamples)
+        guard let floatData = buffer.floatChannelData?[0] else { return }
+
+        let samplesPerNote = Int(sampleRate * noteLength)
+        let volume: Float = 0.12  // Quiet background
+
+        for noteIndex in 0..<totalNotes {
+            let freq = melodyPattern[noteIndex]
+            let noteStart = noteIndex * samplesPerNote
+
+            for i in 0..<samplesPerNote {
+                let t = Float(i) / sampleRate
+                var sample = sin(2.0 * .pi * freq * t)
+
+                // Add a softer harmonic for warmth
+                sample += 0.3 * sin(2.0 * .pi * freq * 2.0 * t)
+
+                // Envelope: smooth attack and release per note
+                let attackLen = Int(sampleRate * 0.03)
+                let releaseLen = Int(sampleRate * 0.08)
+
+                if i < attackLen {
+                    sample *= Float(i) / Float(attackLen)
+                } else if i > samplesPerNote - releaseLen {
+                    sample *= Float(samplesPerNote - i) / Float(releaseLen)
+                }
+
+                floatData[noteStart + i] = sample * volume
+            }
+        }
+
+        let player = AVAudioPlayerNode()
+        engine.attach(player)
+        engine.connect(player, to: engine.mainMixerNode, format: format)
+
+        // Loop the buffer
+        player.scheduleBuffer(buffer, at: nil, options: .loops)
+        player.play()
+
+        musicPlayerNode = player
+        isMusicPlaying = true
+        print("[SoundManager] Background music started")
+    }
+
+    /// Stop background music.
+    func stopMusic() {
+        guard isMusicPlaying, let player = musicPlayerNode, let engine = engine else { return }
+        player.stop()
+        engine.detach(player)
+        musicPlayerNode = nil
+        isMusicPlaying = false
+        print("[SoundManager] Background music stopped")
     }
 
     // MARK: - Tone Generation

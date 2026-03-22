@@ -98,8 +98,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self?.handleExitShortcut()
         }
 
-        // Apply sound setting
+        // Apply sound settings
         SoundManager.shared.enabled = settings.soundEnabled
+        SoundManager.shared.musicEnabled = settings.musicEnabled
 
         // Hide settings window
         settingsWindow?.orderOut(nil)
@@ -157,6 +158,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         #endif
 
+        // Start background music if enabled
+        SoundManager.shared.startMusic()
+
         // Activate our app to ensure the lock window is frontmost
         NSApp.activate(ignoringOtherApps: true)
 
@@ -170,6 +174,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Stop lifecycle monitoring
         lifecycleManager.stop()
+
+        // Stop background music
+        SoundManager.shared.stopMusic()
 
         // Stop the event tap
         eventTapManager.stop()

@@ -67,6 +67,24 @@ final class SettingsStore {
         set { defaults.set(newValue, forKey: "soundEnabled") }
     }
 
+    var musicEnabled: Bool {
+        get { defaults.bool(forKey: "musicEnabled") }
+        set { defaults.set(newValue, forKey: "musicEnabled") }
+    }
+
+    // MARK: - Character Set
+
+    var characterSet: LetterCharacterSet {
+        get {
+            guard let raw = defaults.string(forKey: "characterSet"),
+                  let cs = LetterCharacterSet(rawValue: raw) else {
+                return .english
+            }
+            return cs
+        }
+        set { defaults.set(newValue.rawValue, forKey: "characterSet") }
+    }
+
     private init() {}
 }
 
