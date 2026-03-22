@@ -7,6 +7,7 @@ import AppKit
 final class CharacterMode: PlayMode {
     let scene: SKScene
     private let soundManager = SoundManager.shared
+    private let characterSet: LetterCharacterSet
 
     private var character: SKNode!
     private var body: SKShapeNode!
@@ -28,7 +29,8 @@ final class CharacterMode: PlayMode {
 
     private var pawColorIndex = 0
 
-    init(size: CGSize) {
+    init(size: CGSize, characterSet: LetterCharacterSet = .english) {
+        self.characterSet = characterSet
         let s = SKScene(size: size)
         s.backgroundColor = NSColor(red: 0.1, green: 0.6, blue: 0.3, alpha: 1.0) // Grassy green
         s.scaleMode = .resizeFill
@@ -61,10 +63,8 @@ final class CharacterMode: PlayMode {
         default: break
         }
 
-        // Also spawn a character-typed letter above the character
-        if let chars = characters, !chars.isEmpty {
-            spawnSpeechBubble(chars.uppercased())
-        }
+        // Spawn a letter from the selected character set above the character
+        spawnSpeechBubble(characterSet.character(for: keyCode))
     }
 
     func handleKeyUp(keyCode: UInt16) {}
