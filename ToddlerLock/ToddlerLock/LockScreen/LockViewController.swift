@@ -41,7 +41,7 @@ final class LockViewController: NSViewController {
         case .game:
             mode = GameMode(size: size)
         case .character:
-            mode = CharacterMode(size: size)
+            mode = CharacterMode(size: size, characterSet: SettingsStore.shared.characterSet)
         }
         activeMode = mode
         skView.presentScene(mode.scene)
