@@ -21,8 +21,12 @@
 		4AD5AFCA22689357E9BC7C2A /* PasswordOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279376402B045F24973B78C6 /* PasswordOverlayView.swift */; };
 		1F6930BEC454B22F72CC2FC5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5978C25E31F95FD7BA2FED /* SoundManager.swift */; };
 		19ED8A3D6E1E0B40BC9D4295 /* FreePlayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5657370F539AF0762418B6 /* FreePlayMode.swift */; };
+		3681356554FB1D6A63BE368C /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5189B47D5C473A2D0393CECE /* GameMode.swift */; };
+		AF57F25678080384444B8C38 /* CharacterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FF4140717623384B69C652 /* CharacterMode.swift */; };
 		CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */; };
 		ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */; };
+		5ED8BA99176554C7A9F1AAF1 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFDA1BE1ADB450E3134D60 /* KeychainManager.swift */; };
+		CD636EF4624F19B1591E8636 /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE3562D36E27F345CE5BEF /* ShortcutRecorderView.swift */; };
 		EB25FDB9C2F5AB47208EE997 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6AA312DF00479DCCE4016 /* SettingsStore.swift */; };
 		15E21D8EE2EECED1C3E1D14A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429065E5634357490A421ABD /* SettingsView.swift */; };
 		6C61552DC6670A50FC25765E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7B218FB64174136C14AE6BB /* AppKit.framework */; };
@@ -47,8 +51,12 @@
 		279376402B045F24973B78C6 /* PasswordOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockScreen/PasswordOverlayView.swift"; sourceTree = "<group>"; };
 		BC5978C25E31F95FD7BA2FED /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Effects/SoundManager.swift"; sourceTree = "<group>"; };
 		6E5657370F539AF0762418B6 /* FreePlayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/FreePlayMode.swift"; sourceTree = "<group>"; };
+		5189B47D5C473A2D0393CECE /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/GameMode.swift"; sourceTree = "<group>"; };
+		C6FF4140717623384B69C652 /* CharacterMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/CharacterMode.swift"; sourceTree = "<group>"; };
 		5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/ModeProtocol.swift"; sourceTree = "<group>"; };
 		11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permissions/PermissionChecker.swift"; sourceTree = "<group>"; };
+		A0DFDA1BE1ADB450E3134D60 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/KeychainManager.swift"; sourceTree = "<group>"; };
+		50CE3562D36E27F345CE5BEF /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/ShortcutRecorderView.swift"; sourceTree = "<group>"; };
 		07E6AA312DF00479DCCE4016 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/SettingsStore.swift"; sourceTree = "<group>"; };
 		429065E5634357490A421ABD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/SettingsView.swift"; sourceTree = "<group>"; };
 		E7E7CA9F4DF8A3E05631F826 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App/Info.plist"; sourceTree = "<group>"; };
@@ -160,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				6E5657370F539AF0762418B6 /* FreePlayMode.swift */,
+				5189B47D5C473A2D0393CECE /* GameMode.swift */,
+				C6FF4140717623384B69C652 /* CharacterMode.swift */,
 				5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */,
 			);
 			name = Modes;
@@ -176,6 +186,8 @@
 		F463FD195E910129A74FD8C7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				A0DFDA1BE1ADB450E3134D60 /* KeychainManager.swift */,
+				50CE3562D36E27F345CE5BEF /* ShortcutRecorderView.swift */,
 				07E6AA312DF00479DCCE4016 /* SettingsStore.swift */,
 				429065E5634357490A421ABD /* SettingsView.swift */,
 			);
@@ -243,8 +255,12 @@
 				4AD5AFCA22689357E9BC7C2A /* PasswordOverlayView.swift in Sources */,
 				1F6930BEC454B22F72CC2FC5 /* SoundManager.swift in Sources */,
 				19ED8A3D6E1E0B40BC9D4295 /* FreePlayMode.swift in Sources */,
+				3681356554FB1D6A63BE368C /* GameMode.swift in Sources */,
+				AF57F25678080384444B8C38 /* CharacterMode.swift in Sources */,
 				CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */,
 				ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */,
+				5ED8BA99176554C7A9F1AAF1 /* KeychainManager.swift in Sources */,
+				CD636EF4624F19B1591E8636 /* ShortcutRecorderView.swift in Sources */,
 				EB25FDB9C2F5AB47208EE997 /* SettingsStore.swift in Sources */,
 				15E21D8EE2EECED1C3E1D14A /* SettingsView.swift in Sources */,
 			);

@@ -34,22 +34,17 @@ final class LockViewController: NSViewController {
         guard let window = view.window else { return }
         let size = window.frame.size
 
+        let mode: PlayMode
         switch currentMode {
         case .freePlay:
-            let mode = FreePlayMode(size: size)
-            activeMode = mode
-            skView.presentScene(mode.scene)
+            mode = FreePlayMode(size: size)
         case .game:
-            // Placeholder: use FreePlayMode for now, GameMode built in Phase 5
-            let mode = FreePlayMode(size: size)
-            activeMode = mode
-            skView.presentScene(mode.scene)
+            mode = GameMode(size: size)
         case .character:
-            // Placeholder: use FreePlayMode for now, CharacterMode built in Phase 5
-            let mode = FreePlayMode(size: size)
-            activeMode = mode
-            skView.presentScene(mode.scene)
+            mode = CharacterMode(size: size)
         }
+        activeMode = mode
+        skView.presentScene(mode.scene)
     }
 
     private func setupEventRouting() {

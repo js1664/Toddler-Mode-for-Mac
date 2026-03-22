@@ -111,7 +111,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let mainVC = lockWindowController.mainViewController, let window = mainVC.view.window {
             let overlay = PasswordOverlayView(frame: window.frame)
             overlay.isHidden = true
-            overlay.expectedPassword = settings.password
+            // Password verified via KeychainManager in the overlay
             overlay.onUnlock = { [weak self] in
                 self?.exitLockMode()
             }
