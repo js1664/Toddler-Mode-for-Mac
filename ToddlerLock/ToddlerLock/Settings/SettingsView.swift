@@ -9,6 +9,8 @@ struct SettingsView: View {
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
     @State private var soundEnabled: Bool = SettingsStore.shared.soundEnabled
+    @State private var musicEnabled: Bool = SettingsStore.shared.musicEnabled
+    @State private var characterSet: LetterCharacterSet = SettingsStore.shared.characterSet
     @State private var showPasswordError: Bool = false
     @State private var passwordErrorMessage: String = ""
 
@@ -63,9 +65,22 @@ struct SettingsView: View {
                     }
                 }
 
+                // Characters
+                Section("Letters") {
+                    Picker("Character Set", selection: $characterSet) {
+                        ForEach(LetterCharacterSet.allCases, id: \.self) { cs in
+                            Text(cs.rawValue).tag(cs)
+                        }
+                    }
+                    Text("Preview: \(characterSet.characters.prefix(8).joined(separator: " "))")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+
                 // Sound
                 Section("Sound") {
                     Toggle("Enable sound effects", isOn: $soundEnabled)
+                    Toggle("Background music", isOn: $musicEnabled)
                 }
 
                 // Permissions
@@ -117,6 +132,8 @@ struct SettingsView: View {
         // Save settings
         SettingsStore.shared.selectedMode = selectedMode
         SettingsStore.shared.soundEnabled = soundEnabled
+        SettingsStore.shared.musicEnabled = musicEnabled
+        SettingsStore.shared.characterSet = characterSet
         SettingsStore.shared.exitKeyCode = exitKeyCode
         SettingsStore.shared.exitModifiers = exitModifiers
         SettingsStore.shared.passwordEnabled = passwordEnabled
