@@ -17,8 +17,7 @@ final class PasswordOverlayView: NSView {
     /// Called when the user cancels (or timeout).
     var onCancel: (() -> Void)?
 
-    /// The password to check against (for now, plaintext; Keychain in Phase 4).
-    var expectedPassword: String = ""
+    /// Password is verified via KeychainManager
 
     /// Buffer for password characters received from InputEventBus
     private var passwordBuffer: String = ""
@@ -181,7 +180,7 @@ final class PasswordOverlayView: NSView {
     }
 
     private func attemptUnlock() {
-        if passwordBuffer == expectedPassword {
+        if KeychainManager.verifyPassword(passwordBuffer) {
             hide()
             onUnlock?()
         } else {
