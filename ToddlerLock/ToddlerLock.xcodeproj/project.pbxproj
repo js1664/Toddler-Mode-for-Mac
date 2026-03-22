@@ -1,0 +1,377 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D2F995E8FE36232784EE92ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 104D3305C10C2E29ADCE3956 /* main.swift */; };
+		0194D25DE4933223F1FD5C63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178E2B8E17719705B9B76D0D /* AppDelegate.swift */; };
+		BF68C2A45103E12FF1C04D05 /* EventTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F63C89ACE377814334B838 /* EventTapManager.swift */; };
+		0FA91E6F5C918F51EE6A6410 /* ExitShortcutDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C85B16919D53019E8B28C /* ExitShortcutDetector.swift */; };
+		515562ABFD40EBE2732A93C7 /* InputEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568919F310207942DF070F2D /* InputEvent.swift */; };
+		18BC9B7767B2FCA56E41DC7B /* InputEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6179697334362B3C619D65 /* InputEventBus.swift */; };
+		F57F0B8BB73327F29B69C609 /* PresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D288AFD2638A148A311E50 /* PresentationManager.swift */; };
+		0C09865080DD62C355F18673 /* LifecycleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC7757726060B3DEFDF5277 /* LifecycleManager.swift */; };
+		A0BE2AA42E36D1F9FFE436E3 /* CursorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C101E973F275EC5CEB75A1 /* CursorManager.swift */; };
+		A1967DD9C7FEF1FBE6F7D986 /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD840472D5203F127F74CDBD /* LockViewController.swift */; };
+		1A58250344B931E53B5F7CCB /* LockWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E25778BDBE33506A44F1A7 /* LockWindowController.swift */; };
+		4AD5AFCA22689357E9BC7C2A /* PasswordOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279376402B045F24973B78C6 /* PasswordOverlayView.swift */; };
+		1F6930BEC454B22F72CC2FC5 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5978C25E31F95FD7BA2FED /* SoundManager.swift */; };
+		19ED8A3D6E1E0B40BC9D4295 /* FreePlayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5657370F539AF0762418B6 /* FreePlayMode.swift */; };
+		CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */; };
+		ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */; };
+		EB25FDB9C2F5AB47208EE997 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6AA312DF00479DCCE4016 /* SettingsStore.swift */; };
+		15E21D8EE2EECED1C3E1D14A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429065E5634357490A421ABD /* SettingsView.swift */; };
+		6C61552DC6670A50FC25765E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7B218FB64174136C14AE6BB /* AppKit.framework */; };
+		112B820D330936A7D4320258 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E316B22C9C9CA53DC7CB202 /* SpriteKit.framework */; };
+		8A574D44D01D2536468B4FA0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E0C6800A838F359482B740 /* CoreGraphics.framework */; };
+		5EE8AF2DDBC5A79DD042D53F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163F60131321B9AEAC87DB9C /* AVFoundation.framework */; };
+		3E0E9089666F6E4DE42A457F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CD5B8CD30E640D4EBBE846C /* Security.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		104D3305C10C2E29ADCE3956 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/main.swift"; sourceTree = "<group>"; };
+		178E2B8E17719705B9B76D0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/AppDelegate.swift"; sourceTree = "<group>"; };
+		F7F63C89ACE377814334B838 /* EventTapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/EventTapManager.swift"; sourceTree = "<group>"; };
+		7D7C85B16919D53019E8B28C /* ExitShortcutDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/ExitShortcutDetector.swift"; sourceTree = "<group>"; };
+		568919F310207942DF070F2D /* InputEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/InputEvent.swift"; sourceTree = "<group>"; };
+		3C6179697334362B3C619D65 /* InputEventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/InputEventBus.swift"; sourceTree = "<group>"; };
+		51D288AFD2638A148A311E50 /* PresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/PresentationManager.swift"; sourceTree = "<group>"; };
+		3EC7757726060B3DEFDF5277 /* LifecycleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Lifecycle/LifecycleManager.swift"; sourceTree = "<group>"; };
+		65C101E973F275EC5CEB75A1 /* CursorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockScreen/CursorManager.swift"; sourceTree = "<group>"; };
+		CD840472D5203F127F74CDBD /* LockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockScreen/LockViewController.swift"; sourceTree = "<group>"; };
+		57E25778BDBE33506A44F1A7 /* LockWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockScreen/LockWindowController.swift"; sourceTree = "<group>"; };
+		279376402B045F24973B78C6 /* PasswordOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LockScreen/PasswordOverlayView.swift"; sourceTree = "<group>"; };
+		BC5978C25E31F95FD7BA2FED /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Effects/SoundManager.swift"; sourceTree = "<group>"; };
+		6E5657370F539AF0762418B6 /* FreePlayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/FreePlayMode.swift"; sourceTree = "<group>"; };
+		5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/ModeProtocol.swift"; sourceTree = "<group>"; };
+		11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permissions/PermissionChecker.swift"; sourceTree = "<group>"; };
+		07E6AA312DF00479DCCE4016 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/SettingsStore.swift"; sourceTree = "<group>"; };
+		429065E5634357490A421ABD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/SettingsView.swift"; sourceTree = "<group>"; };
+		E7E7CA9F4DF8A3E05631F826 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "App/Info.plist"; sourceTree = "<group>"; };
+		86B3BC083DF59791BE56CFAE /* ToddlerLock.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "App/ToddlerLock.entitlements"; sourceTree = "<group>"; };
+		71CCD365E3A654DA84DBA191 /* ToddlerLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToddlerLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7B218FB64174136C14AE6BB /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		2E316B22C9C9CA53DC7CB202 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		E1E0C6800A838F359482B740 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		163F60131321B9AEAC87DB9C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		2CD5B8CD30E640D4EBBE846C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		8D3FC6DB5D0827F168A73277 = {
+			isa = PBXGroup;
+			children = (
+				1F894C0CB8C1D00D979C20E2 /* ToddlerLock */,
+				8FC3D1C4F959C81BEBDC9F2A /* Frameworks */,
+				1BADDC1D73C1A20F347483E1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1BADDC1D73C1A20F347483E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				71CCD365E3A654DA84DBA191 /* ToddlerLock.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8FC3D1C4F959C81BEBDC9F2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7B218FB64174136C14AE6BB /* AppKit.framework */,
+				2E316B22C9C9CA53DC7CB202 /* SpriteKit.framework */,
+				E1E0C6800A838F359482B740 /* CoreGraphics.framework */,
+				163F60131321B9AEAC87DB9C /* AVFoundation.framework */,
+				2CD5B8CD30E640D4EBBE846C /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F894C0CB8C1D00D979C20E2 /* ToddlerLock */ = {
+			isa = PBXGroup;
+			children = (
+				FE910D29D648D8F2EA669AEF /* App */,
+				C834A77179EDB8EE1B07A8BD /* InputBlocking */,
+				37D1275F0653F4E391D4F109 /* Effects */,
+				4C175141D9FA5E307FC6A781 /* Lifecycle */,
+				B112678DF3FCA3C2F0FFD6AD /* LockScreen */,
+				2E7D567B6CFC99861685895D /* Modes */,
+				252E20260343465570D8EA34 /* Permissions */,
+				F463FD195E910129A74FD8C7 /* Settings */,
+				E7E7CA9F4DF8A3E05631F826 /* Info.plist */,
+				86B3BC083DF59791BE56CFAE /* ToddlerLock.entitlements */,
+			);
+			path = ToddlerLock;
+			sourceTree = "<group>";
+		};
+		FE910D29D648D8F2EA669AEF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				104D3305C10C2E29ADCE3956 /* main.swift */,
+				178E2B8E17719705B9B76D0D /* AppDelegate.swift */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		C834A77179EDB8EE1B07A8BD /* InputBlocking */ = {
+			isa = PBXGroup;
+			children = (
+				F7F63C89ACE377814334B838 /* EventTapManager.swift */,
+				7D7C85B16919D53019E8B28C /* ExitShortcutDetector.swift */,
+				568919F310207942DF070F2D /* InputEvent.swift */,
+				3C6179697334362B3C619D65 /* InputEventBus.swift */,
+				51D288AFD2638A148A311E50 /* PresentationManager.swift */,
+			);
+			name = InputBlocking;
+			sourceTree = "<group>";
+		};
+		37D1275F0653F4E391D4F109 /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				BC5978C25E31F95FD7BA2FED /* SoundManager.swift */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
+		4C175141D9FA5E307FC6A781 /* Lifecycle */ = {
+			isa = PBXGroup;
+			children = (
+				3EC7757726060B3DEFDF5277 /* LifecycleManager.swift */,
+			);
+			name = Lifecycle;
+			sourceTree = "<group>";
+		};
+		B112678DF3FCA3C2F0FFD6AD /* LockScreen */ = {
+			isa = PBXGroup;
+			children = (
+				65C101E973F275EC5CEB75A1 /* CursorManager.swift */,
+				CD840472D5203F127F74CDBD /* LockViewController.swift */,
+				57E25778BDBE33506A44F1A7 /* LockWindowController.swift */,
+				279376402B045F24973B78C6 /* PasswordOverlayView.swift */,
+			);
+			name = LockScreen;
+			sourceTree = "<group>";
+		};
+		2E7D567B6CFC99861685895D /* Modes */ = {
+			isa = PBXGroup;
+			children = (
+				6E5657370F539AF0762418B6 /* FreePlayMode.swift */,
+				5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */,
+			);
+			name = Modes;
+			sourceTree = "<group>";
+		};
+		252E20260343465570D8EA34 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */,
+			);
+			name = Permissions;
+			sourceTree = "<group>";
+		};
+		F463FD195E910129A74FD8C7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				07E6AA312DF00479DCCE4016 /* SettingsStore.swift */,
+				429065E5634357490A421ABD /* SettingsView.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42AEFBAE01D2DFD981F7DA7D /* ToddlerLock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4555FF564CDA3863A0A5B59;
+			buildPhases = (
+				F680599402C0D80E245DE801 /* Sources */,
+				6BC9136C2E1B992EF374A2EA /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToddlerLock;
+			productName = ToddlerLock;
+			productReference = 71CCD365E3A654DA84DBA191 /* ToddlerLock.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46F86FAA6BBF9AC94A7E4595 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 229AFD403D5F98A92FDE08FA;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8D3FC6DB5D0827F168A73277;
+			productRefGroup = 1BADDC1D73C1A20F347483E1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42AEFBAE01D2DFD981F7DA7D /* ToddlerLock */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F680599402C0D80E245DE801 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2F995E8FE36232784EE92ED /* main.swift in Sources */,
+				0194D25DE4933223F1FD5C63 /* AppDelegate.swift in Sources */,
+				BF68C2A45103E12FF1C04D05 /* EventTapManager.swift in Sources */,
+				0FA91E6F5C918F51EE6A6410 /* ExitShortcutDetector.swift in Sources */,
+				515562ABFD40EBE2732A93C7 /* InputEvent.swift in Sources */,
+				18BC9B7767B2FCA56E41DC7B /* InputEventBus.swift in Sources */,
+				F57F0B8BB73327F29B69C609 /* PresentationManager.swift in Sources */,
+				0C09865080DD62C355F18673 /* LifecycleManager.swift in Sources */,
+				A0BE2AA42E36D1F9FFE436E3 /* CursorManager.swift in Sources */,
+				A1967DD9C7FEF1FBE6F7D986 /* LockViewController.swift in Sources */,
+				1A58250344B931E53B5F7CCB /* LockWindowController.swift in Sources */,
+				4AD5AFCA22689357E9BC7C2A /* PasswordOverlayView.swift in Sources */,
+				1F6930BEC454B22F72CC2FC5 /* SoundManager.swift in Sources */,
+				19ED8A3D6E1E0B40BC9D4295 /* FreePlayMode.swift in Sources */,
+				CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */,
+				ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */,
+				EB25FDB9C2F5AB47208EE997 /* SettingsStore.swift in Sources */,
+				15E21D8EE2EECED1C3E1D14A /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6BC9136C2E1B992EF374A2EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C61552DC6670A50FC25765E /* AppKit.framework in Frameworks */,
+				112B820D330936A7D4320258 /* SpriteKit.framework in Frameworks */,
+				8A574D44D01D2536468B4FA0 /* CoreGraphics.framework in Frameworks */,
+				5EE8AF2DDBC5A79DD042D53F /* AVFoundation.framework in Frameworks */,
+				3E0E9089666F6E4DE42A457F /* Security.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B10504F0F8A7477709D957A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C3AE5995881CE35FD5CAB2D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		4DEB3661A38156DF250681D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 44CHGH7YRS;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ToddlerLock/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.toddlerlock.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		34B30D8D79C98DB375308719 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 44CHGH7YRS;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ToddlerLock/App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.toddlerlock.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		229AFD403D5F98A92FDE08FA /* Build configuration list for PBXProject "ToddlerLock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B10504F0F8A7477709D957A8 /* Debug */,
+				C3AE5995881CE35FD5CAB2D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4555FF564CDA3863A0A5B59 /* Build configuration list for PBXNativeTarget "ToddlerLock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DEB3661A38156DF250681D7 /* Debug */,
+				34B30D8D79C98DB375308719 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+}
