@@ -29,6 +29,7 @@ sources = [
     ("Modes/CharacterMode.swift", "CharacterMode.swift"),
     ("Modes/ModeProtocol.swift", "ModeProtocol.swift"),
     ("Permissions/PermissionChecker.swift", "PermissionChecker.swift"),
+    ("Settings/CharacterSet.swift", "CharacterSet.swift"),
     ("Settings/KeychainManager.swift", "KeychainManager.swift"),
     ("Settings/ShortcutRecorderView.swift", "ShortcutRecorderView.swift"),
     ("Settings/SettingsStore.swift", "SettingsStore.swift"),
@@ -55,7 +56,7 @@ groups = {
     ],
     "Modes": ["Modes/FreePlayMode.swift", "Modes/GameMode.swift", "Modes/CharacterMode.swift", "Modes/ModeProtocol.swift"],
     "Permissions": ["Permissions/PermissionChecker.swift"],
-    "Settings": ["Settings/KeychainManager.swift", "Settings/ShortcutRecorderView.swift", "Settings/SettingsStore.swift", "Settings/SettingsView.swift"],
+    "Settings": ["Settings/CharacterSet.swift", "Settings/KeychainManager.swift", "Settings/ShortcutRecorderView.swift", "Settings/SettingsStore.swift", "Settings/SettingsView.swift"],
 }
 
 # IDs

@@ -25,6 +25,7 @@
 		AF57F25678080384444B8C38 /* CharacterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FF4140717623384B69C652 /* CharacterMode.swift */; };
 		CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */; };
 		ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */; };
+		69B8DBA16DD781BD02474B97 /* CharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC7B8FF6297AC7D002AE23A /* CharacterSet.swift */; };
 		5ED8BA99176554C7A9F1AAF1 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DFDA1BE1ADB450E3134D60 /* KeychainManager.swift */; };
 		CD636EF4624F19B1591E8636 /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE3562D36E27F345CE5BEF /* ShortcutRecorderView.swift */; };
 		EB25FDB9C2F5AB47208EE997 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6AA312DF00479DCCE4016 /* SettingsStore.swift */; };
@@ -55,6 +56,7 @@
 		C6FF4140717623384B69C652 /* CharacterMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/CharacterMode.swift"; sourceTree = "<group>"; };
 		5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/ModeProtocol.swift"; sourceTree = "<group>"; };
 		11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permissions/PermissionChecker.swift"; sourceTree = "<group>"; };
+		AAC7B8FF6297AC7D002AE23A /* CharacterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/CharacterSet.swift"; sourceTree = "<group>"; };
 		A0DFDA1BE1ADB450E3134D60 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/KeychainManager.swift"; sourceTree = "<group>"; };
 		50CE3562D36E27F345CE5BEF /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/ShortcutRecorderView.swift"; sourceTree = "<group>"; };
 		07E6AA312DF00479DCCE4016 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/SettingsStore.swift"; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		F463FD195E910129A74FD8C7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				AAC7B8FF6297AC7D002AE23A /* CharacterSet.swift */,
 				A0DFDA1BE1ADB450E3134D60 /* KeychainManager.swift */,
 				50CE3562D36E27F345CE5BEF /* ShortcutRecorderView.swift */,
 				07E6AA312DF00479DCCE4016 /* SettingsStore.swift */,
@@ -259,6 +262,7 @@
 				AF57F25678080384444B8C38 /* CharacterMode.swift in Sources */,
 				CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */,
 				ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */,
+				69B8DBA16DD781BD02474B97 /* CharacterSet.swift in Sources */,
 				5ED8BA99176554C7A9F1AAF1 /* KeychainManager.swift in Sources */,
 				CD636EF4624F19B1591E8636 /* ShortcutRecorderView.swift in Sources */,
 				EB25FDB9C2F5AB47208EE997 /* SettingsStore.swift in Sources */,
