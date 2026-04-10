@@ -7,10 +7,11 @@ When locked, Toddler Mode takes over the entire screen and blocks all keyboard s
 ## Features
 
 - **Full input blocking** — Command-Tab, Mission Control, volume/brightness keys, and trackpad gestures are all disabled
-- **Three play modes:**
+- **Four play modes:**
   - **Free Play** — Mash keys to see colorful letters, click for shapes and particle effects, move the mouse for a rainbow cursor trail
   - **Game** — Pop floating bubbles by clicking them, with a score counter
   - **Character** — A friendly animated creature follows the mouse, jumps and spins on key presses, and leaves rainbow paw prints
+  - **Chill** — A calmer, low-stimulation mode with soft colors, gentle drifting emoji (fruits, animals), a warm cursor glow, and subtle expanding rings on click
 - **Multi-language letters** — Choose from Arabic, Chinese, English, Hebrew, Japanese, or Korean character sets
 - **Musical sounds** — Each key plays a pentatonic tone (always sounds pleasant), with optional background music
 - **Customizable exit shortcut** — Set any key combination (requires 2+ modifiers) to exit lock mode
@@ -26,7 +27,7 @@ When locked, Toddler Mode takes over the entire screen and blocks all keyboard s
 
 ### Download
 
-Download the latest release from the [Releases page](https://github.com/js1664/toddlerlock/releases).
+Download the latest release from the [Releases page](https://github.com/js1664/Toddler-Mode-for-Mac/releases).
 
 1. Download **Toddler Mode.dmg**
 2. Open the DMG and drag **Toddler Mode.app** to your Applications folder
