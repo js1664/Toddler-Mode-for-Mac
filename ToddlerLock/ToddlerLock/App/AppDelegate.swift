@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             defer: false
         )
         window.contentView = hostingView
-        window.title = "Toddler Lock"
+        window.title = "Toddler Mode"
         window.center()
         window.isReleasedWhenClosed = false
         window.makeKeyAndOrderFront(nil)
@@ -178,12 +178,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let alert = NSAlert()
         alert.messageText = "Input Monitoring Permission Required"
         alert.informativeText = """
-        ToddlerLock needs Input Monitoring permission to block keyboard and mouse input.
+        Toddler Mode needs Input Monitoring permission to block keyboard and mouse input.
 
         In System Settings → Privacy & Security → Input Monitoring:
-        1. Find ToddlerLock in the list (remove any old entries first)
+        1. Find Toddler Mode in the list (remove any old entries first)
         2. Toggle it ON
-        3. Quit and relaunch ToddlerLock
+        3. Quit and relaunch Toddler Mode
 
         Note: each build of the app is treated separately by macOS, so the app you downloaded from GitHub needs its own permission grant — even if an older copy already had it.
         """
