@@ -2,11 +2,25 @@ import CoreGraphics
 import AppKit
 
 /// Checks and requests the permissions needed for the event tap.
-/// Currently requires Input Monitoring. Accessibility is tested but may not be needed.
+/// Uses a probe tap as the source of truth — CGPreflightListenEventAccess() is
+/// unreliable after rebuilds/re-signing, so we actually attempt to create a tap.
 final class PermissionChecker {
     /// Whether Input Monitoring permission is granted.
+    /// Ground truth: try to create a listen-only tap. If it succeeds, we have permission.
     var hasInputMonitoring: Bool {
-        CGPreflightListenEventAccess()
+        let mask: CGEventMask = (1 << CGEventType.keyDown.rawValue)
+        guard let probe = CGEvent.tapCreate(
+            tap: .cgSessionEventTap,
+            place: .headInsertEventTap,
+            options: .listenOnly,
+            eventsOfInterest: mask,
+            callback: { _, _, event, _ in Unmanaged.passUnretained(event) },
+            userInfo: nil
+        ) else {
+            return false
+        }
+        CFMachPortInvalidate(probe)
+        return true
     }
 
     /// Request Input Monitoring permission. Shows the system prompt.
