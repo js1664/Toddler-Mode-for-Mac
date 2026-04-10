@@ -47,7 +47,7 @@ final class PasswordOverlayView: NSView {
         addSubview(containerView)
 
         // Title
-        titleLabel = NSTextField(labelWithString: "Toddler Lock")
+        titleLabel = NSTextField(labelWithString: "Toddler Mode")
         titleLabel.font = .systemFont(ofSize: 28, weight: .bold)
         titleLabel.textColor = .white
         titleLabel.alignment = .center

@@ -1,8 +1,8 @@
-# ToddlerLock
+# Toddler Mode
 
 A macOS app that lets your toddlers safely mash the keyboard and mouse without doing anything to your computer.
 
-When locked, ToddlerLock takes over the entire screen and blocks all keyboard shortcuts, trackpad gestures, and system controls. Your kids see fun colorful animations, hear musical sounds, and feel like they're doing something — while your Mac stays completely safe.
+When locked, Toddler Mode takes over the entire screen and blocks all keyboard shortcuts, trackpad gestures, and system controls. Your kids see fun colorful animations, hear musical sounds, and feel like they're doing something — while your Mac stays completely safe.
 
 ## Features
 
@@ -28,9 +28,9 @@ When locked, ToddlerLock takes over the entire screen and blocks all keyboard sh
 
 Download the latest release from the [Releases page](https://github.com/js1664/toddlerlock/releases).
 
-1. Download **ToddlerLock.dmg**
-2. Open the DMG and drag **ToddlerLock.app** to your Applications folder
-3. Open ToddlerLock from Applications
+1. Download **Toddler Mode.dmg**
+2. Open the DMG and drag **Toddler Mode.app** to your Applications folder
+3. Open Toddler Mode from Applications
 4. Grant **Accessibility** and **Input Monitoring** permissions when prompted (System Settings > Privacy & Security)
 
 ### Build from Source
@@ -42,7 +42,7 @@ Download the latest release from the [Releases page](https://github.com/js1664/t
 
 ## How It Works
 
-1. **Open ToddlerLock** — configure your play mode, exit shortcut, and optional password
+1. **Open Toddler Mode** — configure your play mode, exit shortcut, and optional password
 2. **Click "Lock Now"** — the screen goes full-screen with animations
 3. **Hand it to your toddler** — they mash keys and move the mouse, everything stays safe
 4. **Press your exit shortcut** (default: Cmd+Shift+Esc) — enter your password if set, and you're back to normal
@@ -54,7 +54,7 @@ Download the latest release from the [Releases page](https://github.com/js1664/t
 
 ## Permissions
 
-ToddlerLock needs two macOS permissions to block input:
+Toddler Mode needs two macOS permissions to block input:
 
 - **Accessibility** — allows the app to manage system presentation options
 - **Input Monitoring** — allows the app to intercept keyboard and mouse events

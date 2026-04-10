@@ -24,7 +24,7 @@ struct SettingsView: View {
         VStack(spacing: 0) {
             // Header
             VStack(spacing: 8) {
-                Text("Toddler Lock")
+                Text("Toddler Mode")
                     .font(.system(size: 36, weight: .bold))
                 Text("Let your kids play safely")
                     .font(.title3)
