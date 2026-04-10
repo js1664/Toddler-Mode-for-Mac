@@ -23,6 +23,7 @@
 		19ED8A3D6E1E0B40BC9D4295 /* FreePlayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5657370F539AF0762418B6 /* FreePlayMode.swift */; };
 		3681356554FB1D6A63BE368C /* GameMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5189B47D5C473A2D0393CECE /* GameMode.swift */; };
 		AF57F25678080384444B8C38 /* CharacterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FF4140717623384B69C652 /* CharacterMode.swift */; };
+		678B192D20212DF24EAE33A8 /* ChillMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFCEDB1162AD38DD840E274 /* ChillMode.swift */; };
 		CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */; };
 		ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */; };
 		69B8DBA16DD781BD02474B97 /* CharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC7B8FF6297AC7D002AE23A /* CharacterSet.swift */; };
@@ -54,6 +55,7 @@
 		6E5657370F539AF0762418B6 /* FreePlayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/FreePlayMode.swift"; sourceTree = "<group>"; };
 		5189B47D5C473A2D0393CECE /* GameMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/GameMode.swift"; sourceTree = "<group>"; };
 		C6FF4140717623384B69C652 /* CharacterMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/CharacterMode.swift"; sourceTree = "<group>"; };
+		4EFCEDB1162AD38DD840E274 /* ChillMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/ChillMode.swift"; sourceTree = "<group>"; };
 		5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Modes/ModeProtocol.swift"; sourceTree = "<group>"; };
 		11DEEAF5219F1BACB36A6323 /* PermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Permissions/PermissionChecker.swift"; sourceTree = "<group>"; };
 		AAC7B8FF6297AC7D002AE23A /* CharacterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings/CharacterSet.swift"; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				6E5657370F539AF0762418B6 /* FreePlayMode.swift */,
 				5189B47D5C473A2D0393CECE /* GameMode.swift */,
 				C6FF4140717623384B69C652 /* CharacterMode.swift */,
+				4EFCEDB1162AD38DD840E274 /* ChillMode.swift */,
 				5EFDC920E0C8031CC90C2406 /* ModeProtocol.swift */,
 			);
 			name = Modes;
@@ -260,6 +263,7 @@
 				19ED8A3D6E1E0B40BC9D4295 /* FreePlayMode.swift in Sources */,
 				3681356554FB1D6A63BE368C /* GameMode.swift in Sources */,
 				AF57F25678080384444B8C38 /* CharacterMode.swift in Sources */,
+				678B192D20212DF24EAE33A8 /* ChillMode.swift in Sources */,
 				CEF75671E12EC454D8E387BC /* ModeProtocol.swift in Sources */,
 				ECF3C770AA263EDB6C73F618 /* PermissionChecker.swift in Sources */,
 				69B8DBA16DD781BD02474B97 /* CharacterSet.swift in Sources */,
