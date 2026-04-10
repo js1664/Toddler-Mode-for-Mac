@@ -5,6 +5,7 @@ enum PlayModeType: String, CaseIterable {
     case freePlay = "Free Play"
     case game = "Game"
     case character = "Character"
+    case chill = "Chill"
 }
 
 /// Protocol that all visual play modes conform to.

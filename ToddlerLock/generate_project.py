@@ -27,6 +27,7 @@ sources = [
     ("Modes/FreePlayMode.swift", "FreePlayMode.swift"),
     ("Modes/GameMode.swift", "GameMode.swift"),
     ("Modes/CharacterMode.swift", "CharacterMode.swift"),
+    ("Modes/ChillMode.swift", "ChillMode.swift"),
     ("Modes/ModeProtocol.swift", "ModeProtocol.swift"),
     ("Permissions/PermissionChecker.swift", "PermissionChecker.swift"),
     ("Settings/CharacterSet.swift", "CharacterSet.swift"),
@@ -54,7 +55,7 @@ groups = {
         "LockScreen/LockWindowController.swift",
         "LockScreen/PasswordOverlayView.swift",
     ],
-    "Modes": ["Modes/FreePlayMode.swift", "Modes/GameMode.swift", "Modes/CharacterMode.swift", "Modes/ModeProtocol.swift"],
+    "Modes": ["Modes/FreePlayMode.swift", "Modes/GameMode.swift", "Modes/CharacterMode.swift", "Modes/ChillMode.swift", "Modes/ModeProtocol.swift"],
     "Permissions": ["Permissions/PermissionChecker.swift"],
     "Settings": ["Settings/CharacterSet.swift", "Settings/KeychainManager.swift", "Settings/ShortcutRecorderView.swift", "Settings/SettingsStore.swift", "Settings/SettingsView.swift"],
 }
