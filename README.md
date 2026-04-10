@@ -1,71 +1,118 @@
-# Toddler Mode
+# Toddler Mode for Mac
 
-A macOS app that lets your toddlers safely mash the keyboard and mouse without doing anything to your computer.
+> **Kid-proof your MacBook in one click.** A free, open-source macOS app that locks the screen with fun animations so babies and toddlers can safely bang on the keyboard.
 
-When locked, Toddler Mode takes over the entire screen and blocks all keyboard shortcuts, trackpad gestures, and system controls. Your kids see fun colorful animations, hear musical sounds, and feel like they're doing something — while your Mac stays completely safe.
+[![Latest Release](https://img.shields.io/github/v/release/js1664/Toddler-Mode-for-Mac)](https://github.com/js1664/Toddler-Mode-for-Mac/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![macOS 13+](https://img.shields.io/badge/macOS-13.0%2B-brightgreen)](https://github.com/js1664/Toddler-Mode-for-Mac)
+[![Swift](https://img.shields.io/badge/Swift-5-orange)](https://github.com/js1664/Toddler-Mode-for-Mac)
+
+---
+
+## Why Toddler Mode?
+
+Every parent with a MacBook knows the moment: your toddler lunges for the keyboard, mashes keys, and suddenly you've sent a half-written email, opened 14 browser tabs, and enabled VoiceOver. **Toddler Mode locks your entire Mac** — keyboard shortcuts, trackpad gestures, Mission Control, Dock, menu bar, Cmd-Tab, volume keys, brightness keys — **everything**. Your kid sees colorful letters, shapes, sounds, and animations. Your Mac stays safe.
+
+No subscription. No account. No data collection. Just a single app.
 
 ## Features
 
-- **Full input blocking** — Command-Tab, Mission Control, volume/brightness keys, and trackpad gestures are all disabled
+- **Blocks all input** — Cmd-Tab, Mission Control, Ctrl-Space, volume/brightness keys, trackpad gestures, hot corners — nothing gets through
 - **Four play modes:**
-  - **Free Play** — Mash keys to see colorful letters, click for shapes and particle effects, move the mouse for a rainbow cursor trail
-  - **Game** — Pop floating bubbles by clicking them, with a score counter
-  - **Character** — A friendly animated creature follows the mouse, jumps and spins on key presses, and leaves rainbow paw prints
-  - **Chill** — A calmer, low-stimulation mode with soft colors, gentle drifting emoji (fruits, animals), a warm cursor glow, and subtle expanding rings on click
-- **Multi-language letters** — Choose from Arabic, Chinese, English, Hebrew, Japanese, or Korean character sets
-- **Musical sounds** — Each key plays a pentatonic tone (always sounds pleasant), with optional background music
+  - **Free Play** — Keys spawn colorful bouncing letters, clicks create shapes and particle effects, mouse movement leaves a rainbow trail
+  - **Game** — Tap floating bubbles to pop them with a running score counter
+  - **Character** — A friendly creature follows the mouse, jumps and spins on key presses, and leaves rainbow paw prints
+  - **Chill** — Low-stimulation mode with soft colors, gently drifting emoji (fruits, vegetables, animals), a warm cursor glow, and subtle expanding rings on click — perfect for winding down
+- **Multi-language support** — Choose from Arabic, Chinese, English, Hebrew, Japanese, or Korean character sets
+- **Musical key sounds** — Each key plays a pentatonic tone (always sounds pleasant)
 - **Customizable exit shortcut** — Set any key combination (requires 2+ modifiers) to exit lock mode
-- **Optional password protection** — Require a password to unlock (stored securely in macOS Keychain)
-- **Debug safety** — Development builds auto-unlock after 60 seconds so you never get trapped
+- **Optional password protection** — Require a password to unlock (stored in macOS Keychain)
+- **Notarized and signed** — Downloads are Apple-notarized so macOS won't block the app
+- **100% free and open source** — MIT licensed, no ads, no tracking
+
+## Download
+
+**[Download the latest release](https://github.com/js1664/Toddler-Mode-for-Mac/releases/latest)** — grab **Toddler Mode.dmg**, open it, and drag to Applications.
+
+## Quick Start
+
+1. **Download and install** Toddler Mode (see above)
+2. **Open the app** and grant Accessibility + Input Monitoring permissions when prompted
+3. **Pick a play mode** (Free Play, Game, Character, or Chill)
+4. **Click "Lock Now"** — full-screen animations take over
+5. **Hand it to your kid** — they mash keys, move the mouse, everything stays safe
+6. **Press your exit shortcut** (default: **Cmd+Shift+Esc**) to unlock
 
 ## Requirements
 
 - macOS 13.0 (Ventura) or later
 - Apple Silicon or Intel Mac
 
-## Installation
-
-### Download
-
-Download the latest release from the [Releases page](https://github.com/js1664/Toddler-Mode-for-Mac/releases).
-
-1. Download **Toddler Mode.dmg**
-2. Open the DMG and drag **Toddler Mode.app** to your Applications folder
-3. Open Toddler Mode from Applications
-4. Grant **Accessibility** and **Input Monitoring** permissions when prompted (System Settings > Privacy & Security)
-
-### Build from Source
-
-1. Clone this repo
-2. Open `ToddlerLock/ToddlerLock.xcodeproj` in Xcode 16+
-3. Set your Development Team in Signing & Capabilities
-4. Build and run (Cmd+R)
-
-## How It Works
-
-1. **Open Toddler Mode** — configure your play mode, exit shortcut, and optional password
-2. **Click "Lock Now"** — the screen goes full-screen with animations
-3. **Hand it to your toddler** — they mash keys and move the mouse, everything stays safe
-4. **Press your exit shortcut** (default: Cmd+Shift+Esc) — enter your password if set, and you're back to normal
-
 ## How to Exit
 
 - Press your configured shortcut (default: **Cmd+Shift+Esc**)
-- Or restart the computer
+- If password protection is on, enter your password
+- Or restart the computer as a failsafe
 
 ## Permissions
 
 Toddler Mode needs two macOS permissions to block input:
 
-- **Accessibility** — allows the app to manage system presentation options
-- **Input Monitoring** — allows the app to intercept keyboard and mouse events
+| Permission | Why |
+|---|---|
+| **Accessibility** | Manage system presentation (hide Dock, menu bar, disable app switching) |
+| **Input Monitoring** | Intercept keyboard and mouse events before they reach other apps |
 
-These are granted in System Settings > Privacy & Security. The app will guide you through this on first launch.
+Grant these in **System Settings > Privacy & Security**. The app guides you through it on first launch.
 
-## Technical Details
+## Build from Source
 
-Built with Swift, AppKit, and SpriteKit. Input blocking uses `CGEventTap` (intercepts events at the system level) and `NSApplication.PresentationOptions` (hides Dock, menu bar, and disables process switching). Sound is synthesized in real-time via `AVAudioEngine`.
+```bash
+git clone https://github.com/js1664/Toddler-Mode-for-Mac.git
+cd Toddler-Mode-for-Mac/ToddlerLock
+open ToddlerLock.xcodeproj
+```
+
+Set your Development Team in Signing & Capabilities, then build and run (Cmd+R). Requires Xcode 16+.
+
+## How It Works
+
+Built with **Swift**, **AppKit**, and **SpriteKit**:
+
+- `CGEventTap` intercepts all keyboard and mouse events at the system level
+- `NSApplication.PresentationOptions` hides the Dock, menu bar, and disables process switching
+- `AVAudioEngine` synthesizes pentatonic tones in real time
+- `CGAssociateMouseAndMouseCursorPosition` constrains the cursor to the lock screen
+
+## FAQ
+
+**Will my toddler be able to exit?**
+No. The exit shortcut requires pressing 2+ modifier keys simultaneously (e.g., Cmd+Shift+Esc), which toddlers can't do intentionally. You can also add a password for extra safety.
+
+**Does it work on external monitors?**
+Yes — Toddler Mode covers all connected displays.
+
+**Does it work on MacBook Air / MacBook Pro / iMac / Mac Mini?**
+Yes — any Mac running macOS 13 (Ventura) or later.
+
+**Is it safe? Will it damage my Mac?**
+Completely safe. The app only intercepts input events and draws animations on screen. It doesn't modify system files, install drivers, or run in the background when not locked.
+
+**Can I use it on an iPad?**
+Not currently — this is a macOS-only app. iPad doesn't allow the level of input interception needed.
+
+## Alternatives
+
+Toddler Mode is purpose-built for macOS. If you're looking for similar tools:
+- **Baby Keyboard** (iOS) — for iPhones and iPads
+- **Toddler Keys** (Windows) — similar concept for Windows PCs
+
+Toddler Mode is the only free, open-source, native option for Mac.
+
+## Contributing
+
+Contributions welcome! Open an issue or submit a pull request.
 
 ## License
 
-MIT
+[MIT](LICENSE)
