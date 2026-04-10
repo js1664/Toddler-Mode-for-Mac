@@ -8,7 +8,6 @@ final class FreePlayMode: PlayMode {
     private var cursorFollower: SKShapeNode?
     private var trailEmitter: SKEmitterNode?
     private let soundManager = SoundManager.shared
-    private let characterSet: LetterCharacterSet
 
     /// Bright colors that look great on a dark background
     private let colors: [NSColor] = [
@@ -20,12 +19,11 @@ final class FreePlayMode: PlayMode {
     /// Fun rounded fonts
     private let fontNames = ["Futura-Bold", "AvenirNext-Bold", "Helvetica-Bold"]
 
-    init(size: CGSize, characterSet: LetterCharacterSet = .english) {
+    init(size: CGSize) {
         let s = SKScene(size: size)
         s.backgroundColor = .black
         s.scaleMode = .resizeFill
         self.scene = s
-        self.characterSet = characterSet
 
         setupCursorFollower()
     }
@@ -33,8 +31,13 @@ final class FreePlayMode: PlayMode {
     // MARK: - PlayMode
 
     func handleKeyDown(keyCode: UInt16, characters: String?) {
-        // Use the selected character set to determine what letter to show
-        let displayChar = characterSet.character(for: keyCode)
+        guard let chars = characters, !chars.isEmpty else {
+            // Non-character keys (modifiers, etc.) — still play a sound but don't spawn a letter.
+            soundManager.playKeyTone(keyCode: keyCode)
+            return
+        }
+
+        let displayChar = chars.uppercased()
         spawnLetter(displayChar)
         soundManager.playKeyTone(keyCode: keyCode)
     }
