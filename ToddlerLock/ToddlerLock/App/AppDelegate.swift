@@ -85,6 +85,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func enterLockMode() {
         guard !isLocked else { return }
 
+        // Probe permission before tearing down the UI. If the tap can't be created,
+        // show a helpful alert and bail out cleanly rather than silently failing.
+        if !permissionChecker.hasInputMonitoring {
+            showPermissionAlert()
+            return
+        }
+
         isLocked = true
 
         // Configure the exit shortcut detector
@@ -165,6 +172,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
 
         print("[AppDelegate] Lock mode entered")
+    }
+
+    private func showPermissionAlert() {
+        let alert = NSAlert()
+        alert.messageText = "Input Monitoring Permission Required"
+        alert.informativeText = """
+        ToddlerLock needs Input Monitoring permission to block keyboard and mouse input.
+
+        In System Settings → Privacy & Security → Input Monitoring:
+        1. Find ToddlerLock in the list (remove any old entries first)
+        2. Toggle it ON
+        3. Quit and relaunch ToddlerLock
+
+        Note: each build of the app is treated separately by macOS, so the app you downloaded from GitHub needs its own permission grant — even if an older copy already had it.
+        """
+        alert.addButton(withTitle: "Open Settings")
+        alert.addButton(withTitle: "Cancel")
+        let response = alert.runModal()
+        if response == .alertFirstButtonReturn {
+            permissionChecker.openInputMonitoringSettings()
+        }
     }
 
     private func exitLockMode() {
