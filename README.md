@@ -37,7 +37,7 @@ No subscription. No account. No data collection. Just a single app.
 ## Quick Start
 
 1. **Download and install** Toddler Mode (see above)
-2. **Open the app** and grant Accessibility + Input Monitoring permissions when prompted
+2. **Open the app** and grant Accessibility permission when prompted
 3. **Pick a play mode** (Free Play, Game, Character, or Chill)
 4. **Click "Lock Now"** — full-screen animations take over
 5. **Hand it to your kid** — they mash keys, move the mouse, everything stays safe
@@ -56,14 +56,9 @@ No subscription. No account. No data collection. Just a single app.
 
 ## Permissions
 
-Toddler Mode needs two macOS permissions to block input:
+Toddler Mode needs **Accessibility** permission to intercept keyboard and mouse events and manage system presentation (hide Dock, menu bar, disable app switching).
 
-| Permission | Why |
-|---|---|
-| **Accessibility** | Manage system presentation (hide Dock, menu bar, disable app switching) |
-| **Input Monitoring** | Intercept keyboard and mouse events before they reach other apps |
-
-Grant these in **System Settings > Privacy & Security**. The app guides you through it on first launch.
+Grant it in **System Settings > Privacy & Security > Accessibility**. The app guides you through it on first launch.
 
 ## Build from Source
 

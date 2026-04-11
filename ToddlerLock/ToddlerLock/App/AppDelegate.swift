@@ -30,8 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
 
         // Request permissions on first launch
-        if !permissionChecker.hasInputMonitoring {
-            permissionChecker.requestInputMonitoring()
+        if !permissionChecker.hasAccessibility {
+            permissionChecker.requestAccessibility()
         }
 
         showSettingsWindow()
@@ -87,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Probe permission before tearing down the UI. If the tap can't be created,
         // show a helpful alert and bail out cleanly rather than silently failing.
-        if !permissionChecker.hasInputMonitoring {
+        if !permissionChecker.hasAccessibility {
             showPermissionAlert()
             return
         }
@@ -176,22 +176,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func showPermissionAlert() {
         let alert = NSAlert()
-        alert.messageText = "Input Monitoring Permission Required"
+        alert.messageText = "Accessibility Permission Required"
         alert.informativeText = """
-        Toddler Mode needs Input Monitoring permission to block keyboard and mouse input.
+        Toddler Mode needs Accessibility permission to block keyboard and mouse input.
 
-        In System Settings → Privacy & Security → Input Monitoring:
-        1. Find Toddler Mode in the list (remove any old entries first)
+        In System Settings → Privacy & Security → Accessibility:
+        1. Find Toddler Mode in the list
         2. Toggle it ON
         3. Quit and relaunch Toddler Mode
-
-        Note: each build of the app is treated separately by macOS, so the app you downloaded from GitHub needs its own permission grant — even if an older copy already had it.
         """
         alert.addButton(withTitle: "Open Settings")
         alert.addButton(withTitle: "Cancel")
         let response = alert.runModal()
         if response == .alertFirstButtonReturn {
-            permissionChecker.openInputMonitoringSettings()
+            permissionChecker.openAccessibilitySettings()
         }
     }
 

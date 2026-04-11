@@ -134,10 +134,8 @@ final class LifecycleManager {
     // MARK: - Permission Monitoring
 
     private func checkPermissions() {
-        if !CGPreflightListenEventAccess() {
-            print("[LifecycleManager] WARNING: Input Monitoring permission revoked!")
-            // The tap will stop working. Not much we can do except log and try to re-request.
-            // In a future version, could show a warning overlay.
+        if !AXIsProcessTrusted() {
+            print("[LifecycleManager] WARNING: Accessibility permission revoked!")
         }
     }
 

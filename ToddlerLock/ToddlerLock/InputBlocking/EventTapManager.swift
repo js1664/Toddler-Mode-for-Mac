@@ -48,7 +48,7 @@ final class EventTapManager {
             callback: eventTapCallback,
             userInfo: refcon
         ) else {
-            print("[EventTapManager] Failed to create event tap. Check Input Monitoring permission.")
+            print("[EventTapManager] Failed to create event tap. Check Accessibility permission.")
             return false
         }
 
