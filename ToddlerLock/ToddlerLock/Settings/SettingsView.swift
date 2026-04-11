@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Settings view shown before locking. Allows configuration of mode, shortcut, password.
+/// Settings view shown before locking. Compact, friendly layout.
 struct SettingsView: View {
     @State private var selectedMode: PlayModeType = SettingsStore.shared.selectedMode
     @State private var exitKeyCode: UInt16 = SettingsStore.shared.exitKeyCode
@@ -13,124 +13,187 @@ struct SettingsView: View {
     @State private var characterSet: LetterCharacterSet = SettingsStore.shared.characterSet
     @State private var showPasswordError: Bool = false
     @State private var passwordErrorMessage: String = ""
-    @State private var hasAccessibility: Bool = PermissionChecker().hasAccessibility
-
-    private let pollTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
-    let permissionChecker = PermissionChecker()
     var onLockNow: (() -> Void)?
 
+    private let modeEmoji: [PlayModeType: String] = [
+        .freePlay: "🎨",
+        .game: "🎮",
+        .character: "🐾",
+        .chill: "🌿"
+    ]
+
+    private let modeDescription: [PlayModeType: String] = [
+        .freePlay: "Colorful letters, shapes & rainbow trails",
+        .game: "Pop floating bubbles to score points",
+        .character: "A friendly creature follows the mouse",
+        .chill: "Gentle emoji & soft colors for calm play"
+    ]
+
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 14) {
             // Header
-            VStack(spacing: 8) {
+            VStack(spacing: 2) {
                 Text("Toddler Mode")
-                    .font(.system(size: 36, weight: .bold))
+                    .font(.system(size: 30, weight: .heavy, design: .rounded))
+                    .foregroundStyle(
+                        LinearGradient(
+                            colors: [.blue, .purple, .pink],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
                 Text("Let your kids play safely")
-                    .font(.title3)
+                    .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.secondary)
             }
-            .padding(.top, 30)
-            .padding(.bottom, 20)
+            .padding(.top, 18)
 
-            Form {
-                // Mode Selection
-                Section("Play Mode") {
-                    Picker("Mode", selection: $selectedMode) {
-                        ForEach(PlayModeType.allCases, id: \.self) { mode in
-                            Text(mode.rawValue).tag(mode)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
+            // Play Mode — fun cards
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Play Mode")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 4)
 
-                // Exit Shortcut
-                Section("Exit Shortcut") {
-                    ShortcutRecorderView(keyCode: $exitKeyCode, modifiers: $exitModifiers)
-                        .frame(height: 30)
-                    Text("Click Record, then press your desired shortcut (requires 2+ modifiers)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                // Password
-                Section("Password Protection") {
-                    Toggle("Require password to unlock", isOn: $passwordEnabled)
-
-                    if passwordEnabled {
-                        SecureField("Password", text: $password)
-                        SecureField("Confirm Password", text: $confirmPassword)
-                        if showPasswordError {
-                            Text(passwordErrorMessage)
-                                .font(.caption)
-                                .foregroundColor(.red)
-                        }
-                    }
-                }
-
-                // Characters
-                Section("Letters") {
-                    Picker("Character Set", selection: $characterSet) {
-                        ForEach(LetterCharacterSet.allCases, id: \.self) { cs in
-                            Text(cs.rawValue).tag(cs)
-                        }
-                    }
-                    Text("Preview: \(characterSet.characters.prefix(8).joined(separator: " "))")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                // Sound
-                Section("Sound") {
-                    Toggle("Enable sound effects", isOn: $soundEnabled)
-                    Toggle("Background music", isOn: $musicEnabled)
-                }
-
-                // Permissions
-                Section("Permissions") {
-                    HStack {
-                        Image(systemName: hasAccessibility ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                            .foregroundColor(hasAccessibility ? .green : .orange)
-                        Text("Accessibility")
-                        Spacer()
-                        if !hasAccessibility {
-                            Button("Grant") {
-                                permissionChecker.requestAccessibility()
+                HStack(spacing: 8) {
+                    ForEach(PlayModeType.allCases, id: \.self) { mode in
+                        Button(action: { selectedMode = mode }) {
+                            VStack(spacing: 4) {
+                                Text(modeEmoji[mode] ?? "")
+                                    .font(.system(size: 24))
+                                Text(mode.rawValue)
+                                    .font(.system(size: 11, weight: .semibold, design: .rounded))
                             }
-                        } else {
-                            Text("Granted").foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(selectedMode == mode
+                                          ? Color.accentColor.opacity(0.15)
+                                          : Color.gray.opacity(0.08))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(selectedMode == mode
+                                            ? Color.accentColor
+                                            : Color.clear, lineWidth: 2)
+                            )
                         }
+                        .buttonStyle(.plain)
                     }
                 }
+
+                Text(modeDescription[selectedMode] ?? "")
+                    .font(.system(size: 11, design: .rounded))
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 4)
             }
-            .formStyle(.grouped)
-            .frame(maxHeight: .infinity)
+            .padding(.horizontal, 24)
+
+            // Options in rounded card
+            GroupBox {
+                VStack(spacing: 10) {
+                    // Characters + Sound side by side
+                    HStack(alignment: .top, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Label("Letters", systemImage: "textformat")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            Picker("Character Set", selection: $characterSet) {
+                                ForEach(LetterCharacterSet.allCases, id: \.self) { cs in
+                                    Text(cs.rawValue).tag(cs)
+                                }
+                            }
+                            .labelsHidden()
+                            .controlSize(.small)
+                            Text(characterSet.characters.prefix(6).joined(separator: " "))
+                                .font(.system(size: 10))
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Label("Sound", systemImage: "speaker.wave.2")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            Toggle("Sound effects", isOn: $soundEnabled)
+                                .toggleStyle(.checkbox)
+                                .controlSize(.small)
+                            Toggle("Background music", isOn: $musicEnabled)
+                                .toggleStyle(.checkbox)
+                                .controlSize(.small)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+
+                    Divider()
+
+                    // Exit Shortcut + Password side by side
+                    HStack(alignment: .top, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Label("Exit Shortcut", systemImage: "rectangle.portrait.and.arrow.right")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            ShortcutRecorderView(keyCode: $exitKeyCode, modifiers: $exitModifiers)
+                                .frame(height: 26)
+                            Text("Requires 2+ modifiers")
+                                .font(.system(size: 10))
+                                .foregroundColor(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Label("Password", systemImage: "key")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                            Toggle("Require to unlock", isOn: $passwordEnabled)
+                                .toggleStyle(.checkbox)
+                                .controlSize(.small)
+                            if passwordEnabled {
+                                SecureField("Password", text: $password)
+                                    .textFieldStyle(.roundedBorder)
+                                    .controlSize(.small)
+                                    .frame(maxWidth: 150)
+                                SecureField("Confirm", text: $confirmPassword)
+                                    .textFieldStyle(.roundedBorder)
+                                    .controlSize(.small)
+                                    .frame(maxWidth: 150)
+                                if showPasswordError {
+                                    Text(passwordErrorMessage)
+                                        .font(.system(size: 10))
+                                        .foregroundColor(.red)
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                .padding(4)
+            }
+            .padding(.horizontal, 24)
+
+            Spacer()
 
             // Lock Button
-            VStack(spacing: 8) {
+            VStack(spacing: 6) {
                 Button(action: lockNow) {
-                    HStack {
+                    HStack(spacing: 8) {
                         Image(systemName: "lock.fill")
                         Text("Lock Now")
                     }
-                    .font(.title2.bold())
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
+                .padding(.horizontal, 24)
 
                 #if DEBUG
                 Text("DEBUG: Auto-unlock after 60 seconds")
-                    .font(.caption)
+                    .font(.caption2)
                     .foregroundColor(.orange)
                 #endif
             }
-            .padding(20)
+            .padding(.bottom, 16)
         }
-        .frame(width: 500, height: 650)
-        .onReceive(pollTimer) { _ in
-            hasAccessibility = permissionChecker.hasAccessibility
-        }
+        .frame(width: 480, height: 500)
     }
 
     private func lockNow() {

@@ -18,6 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var settingsWindow: NSWindow?
     private var passwordOverlay: PasswordOverlayView?
 
+    // MARK: - Menu Bar
+
+    private var statusItem: NSStatusItem?
+
     // MARK: - State
 
     private var isLocked = false
@@ -29,24 +33,99 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.regular)
         NSApp.activate(ignoringOtherApps: true)
 
-        // Request permissions on first launch
-        if !permissionChecker.hasAccessibility {
-            permissionChecker.requestAccessibility()
-        }
+        // Set up the main menu (enables Cmd+Q, Cmd+W, etc.)
+        setupMainMenu()
+
+        // Set up the menu bar status item
+        setupStatusItem()
 
         showSettingsWindow()
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return !isLocked // Only quit when not locked
+        return false // Keep running for the status item
     }
 
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         if isLocked {
-            // Prevent quitting while locked
             return .terminateCancel
         }
         return .terminateNow
+    }
+
+    // MARK: - Main Menu
+
+    private func setupMainMenu() {
+        let mainMenu = NSMenu()
+
+        // App menu
+        let appMenuItem = NSMenuItem()
+        let appMenu = NSMenu()
+        appMenu.addItem(withTitle: "About Toddler Mode", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
+        appMenu.addItem(.separator())
+        appMenu.addItem(withTitle: "Settings...", action: #selector(showSettingsAction), keyEquivalent: ",")
+        appMenu.addItem(.separator())
+        appMenu.addItem(withTitle: "Hide Toddler Mode", action: #selector(NSApplication.hide(_:)), keyEquivalent: "h")
+        let hideOthers = appMenu.addItem(withTitle: "Hide Others", action: #selector(NSApplication.hideOtherApplications(_:)), keyEquivalent: "h")
+        hideOthers.keyEquivalentModifierMask = [.command, .option]
+        appMenu.addItem(withTitle: "Show All", action: #selector(NSApplication.unhideAllApplications(_:)), keyEquivalent: "")
+        appMenu.addItem(.separator())
+        appMenu.addItem(withTitle: "Quit Toddler Mode", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
+        appMenuItem.submenu = appMenu
+        mainMenu.addItem(appMenuItem)
+
+        // Window menu
+        let windowMenuItem = NSMenuItem()
+        let windowMenu = NSMenu(title: "Window")
+        windowMenu.addItem(withTitle: "Close Window", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
+        windowMenu.addItem(withTitle: "Minimize", action: #selector(NSWindow.performMiniaturize(_:)), keyEquivalent: "m")
+        windowMenuItem.submenu = windowMenu
+        mainMenu.addItem(windowMenuItem)
+
+        NSApp.mainMenu = mainMenu
+    }
+
+    @objc private func showSettingsAction() {
+        showSettingsWindow()
+    }
+
+    // MARK: - Status Item (Menu Bar Icon)
+
+    private func setupStatusItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        if let button = statusItem?.button {
+            // Use the app icon for the menu bar, scaled to 18x18
+            if let appIcon = NSImage(named: "AppIcon") {
+                let resized = NSImage(size: NSSize(width: 18, height: 18))
+                resized.lockFocus()
+                appIcon.draw(in: NSRect(x: 0, y: 0, width: 18, height: 18))
+                resized.unlockFocus()
+                resized.isTemplate = false
+                button.image = resized
+            } else {
+                button.image = NSImage(systemSymbolName: "lock.fill", accessibilityDescription: "Toddler Mode")
+            }
+        }
+        updateStatusMenu()
+    }
+
+    private func updateStatusMenu() {
+        let menu = NSMenu()
+        if isLocked {
+            let lockedItem = menu.addItem(withTitle: "Locked", action: nil, keyEquivalent: "")
+            lockedItem.isEnabled = false
+        } else {
+            menu.addItem(withTitle: "Lock Now", action: #selector(lockFromMenu), keyEquivalent: "l")
+            menu.addItem(.separator())
+            menu.addItem(withTitle: "Settings...", action: #selector(showSettingsAction), keyEquivalent: "")
+        }
+        menu.addItem(.separator())
+        menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
+        statusItem?.menu = menu
+    }
+
+    @objc private func lockFromMenu() {
+        enterLockMode()
     }
 
     // MARK: - Settings Window
@@ -65,7 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         let hostingView = NSHostingView(rootView: settingsView)
         let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 500, height: 620),
+            contentRect: NSRect(x: 0, y: 0, width: 480, height: 500),
             styleMask: [.titled, .closable, .miniaturizable],
             backing: .buffered,
             defer: false
@@ -85,14 +164,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private func enterLockMode() {
         guard !isLocked else { return }
 
-        // Probe permission before tearing down the UI. If the tap can't be created,
-        // show a helpful alert and bail out cleanly rather than silently failing.
-        if !permissionChecker.hasAccessibility {
-            showPermissionAlert()
-            return
-        }
-
         isLocked = true
+        updateStatusMenu()
 
         // Configure the exit shortcut detector
         eventTapManager.shortcutDetector = ExitShortcutDetector(
@@ -119,7 +192,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let mainVC = lockWindowController.mainViewController, let window = mainVC.view.window {
             let overlay = PasswordOverlayView(frame: window.frame)
             overlay.isHidden = true
-            // Password verified via KeychainManager in the overlay
             overlay.onUnlock = { [weak self] in
                 self?.exitLockMode()
             }
@@ -131,7 +203,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             overlay.autoresizingMask = [.width, .height]
             passwordOverlay = overlay
 
-            // Route password events
             eventBus.onPasswordEvent = { [weak overlay] event in
                 overlay?.handleKeyEvent(event)
             }
@@ -146,8 +217,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Start the event tap — this blocks all input
         let tapStarted = eventTapManager.start()
         if !tapStarted {
-            print("[AppDelegate] ERROR: Event tap failed to start. Aborting lock.")
+            print("[AppDelegate] ERROR: Event tap failed to start.")
             exitLockMode()
+            showPermissionAlert()
             return
         }
 
@@ -197,6 +269,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard isLocked else { return }
 
         isLocked = false
+        updateStatusMenu()
 
         // Stop lifecycle monitoring
         lifecycleManager.stop()
