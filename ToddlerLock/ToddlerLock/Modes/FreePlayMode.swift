@@ -31,13 +31,8 @@ final class FreePlayMode: PlayMode {
     // MARK: - PlayMode
 
     func handleKeyDown(keyCode: UInt16, characters: String?) {
-        guard let chars = characters, !chars.isEmpty else {
-            // Non-character keys (modifiers, etc.) — still play a sound but don't spawn a letter.
-            soundManager.playKeyTone(keyCode: keyCode)
-            return
-        }
-
-        let displayChar = chars.uppercased()
+        let charSet = SettingsStore.shared.characterSet
+        let displayChar = charSet.randomCharacter()
         spawnLetter(displayChar)
         soundManager.playKeyTone(keyCode: keyCode)
     }
