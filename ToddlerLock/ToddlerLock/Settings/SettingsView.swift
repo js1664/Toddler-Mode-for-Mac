@@ -13,7 +13,6 @@ struct SettingsView: View {
     @State private var characterSet: LetterCharacterSet = SettingsStore.shared.characterSet
     @State private var showPasswordError: Bool = false
     @State private var passwordErrorMessage: String = ""
-    @State private var hasInputMonitoring: Bool = PermissionChecker().hasInputMonitoring
     @State private var hasAccessibility: Bool = PermissionChecker().hasAccessibility
 
     private let pollTimer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
@@ -89,19 +88,6 @@ struct SettingsView: View {
                 // Permissions
                 Section("Permissions") {
                     HStack {
-                        Image(systemName: hasInputMonitoring ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                            .foregroundColor(hasInputMonitoring ? .green : .orange)
-                        Text("Input Monitoring")
-                        Spacer()
-                        if !hasInputMonitoring {
-                            Button("Open Settings") {
-                                permissionChecker.openInputMonitoringSettings()
-                            }
-                        } else {
-                            Text("Granted").foregroundColor(.secondary)
-                        }
-                    }
-                    HStack {
                         Image(systemName: hasAccessibility ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
                             .foregroundColor(hasAccessibility ? .green : .orange)
                         Text("Accessibility")
@@ -143,7 +129,6 @@ struct SettingsView: View {
         }
         .frame(width: 500, height: 650)
         .onReceive(pollTimer) { _ in
-            hasInputMonitoring = permissionChecker.hasInputMonitoring
             hasAccessibility = permissionChecker.hasAccessibility
         }
     }
