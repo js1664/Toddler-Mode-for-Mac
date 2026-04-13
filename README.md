@@ -111,3 +111,6 @@ Contributions welcome! Open an issue or submit a pull request.
 ## License
 
 [MIT](LICENSE)
+
+## Public Webpage
+[![Share with others](https://suss.dev/toddlermodemac/favicon.png)](https://suss.dev/toddlermodemac/)  https://suss.dev/toddlermodemac/ 
