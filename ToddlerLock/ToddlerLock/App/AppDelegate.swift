@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - State
 
     private var isLocked = false
+    private var displayChangeObserver: NSObjectProtocol?
 
     // MARK: - App Lifecycle
 
@@ -62,6 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let appMenuItem = NSMenuItem()
         let appMenu = NSMenu()
         appMenu.addItem(withTitle: "About Toddler Mode", action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
+        appMenu.addItem(withTitle: "Check for Updates…", action: #selector(checkForUpdatesAction), keyEquivalent: "")
         appMenu.addItem(.separator())
         appMenu.addItem(withTitle: "Settings...", action: #selector(showSettingsAction), keyEquivalent: ",")
         appMenu.addItem(.separator())
@@ -87,6 +89,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func showSettingsAction() {
         showSettingsWindow()
+    }
+
+    @objc private func checkForUpdatesAction() {
+        UpdateManager.shared.checkForUpdates()
     }
 
     // MARK: - Status Item (Menu Bar Icon)
@@ -118,6 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             menu.addItem(withTitle: "Lock Now", action: #selector(lockFromMenu), keyEquivalent: "l")
             menu.addItem(.separator())
             menu.addItem(withTitle: "Settings...", action: #selector(showSettingsAction), keyEquivalent: "")
+            menu.addItem(withTitle: "Check for Updates…", action: #selector(checkForUpdatesAction), keyEquivalent: "")
         }
         menu.addItem(.separator())
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
@@ -189,22 +196,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         lockWindowController.showLockScreen(mode: settings.selectedMode)
 
         // Set up password overlay on the main lock view
-        if let mainVC = lockWindowController.mainViewController, let window = mainVC.view.window {
-            let overlay = PasswordOverlayView(frame: window.frame)
-            overlay.isHidden = true
-            overlay.onUnlock = { [weak self] in
-                self?.exitLockMode()
-            }
-            overlay.onCancel = { [weak self] in
-                self?.dismissPasswordOverlay()
-            }
-            mainVC.view.addSubview(overlay)
-            overlay.frame = mainVC.view.bounds
-            overlay.autoresizingMask = [.width, .height]
-            passwordOverlay = overlay
+        setupPasswordOverlay()
 
-            eventBus.onPasswordEvent = { [weak overlay] event in
-                overlay?.handleKeyEvent(event)
+        // Observe display changes so we can re-attach the password overlay
+        // when windows are rebuilt by LockWindowController
+        displayChangeObserver = NotificationCenter.default.addObserver(
+            forName: NSApplication.didChangeScreenParametersNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            // Small delay to let LockWindowController rebuild first
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self?.setupPasswordOverlay()
             }
         }
 
@@ -271,6 +274,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         isLocked = false
         updateStatusMenu()
 
+        // Remove display change observer
+        if let observer = displayChangeObserver {
+            NotificationCenter.default.removeObserver(observer)
+            displayChangeObserver = nil
+        }
+
         // Stop lifecycle monitoring
         lifecycleManager.stop()
 
@@ -300,6 +309,35 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showSettingsWindow()
 
         print("[AppDelegate] Lock mode exited")
+    }
+
+    // MARK: - Password Overlay
+
+    /// Set up (or re-set up) the password overlay on the current main lock view.
+    /// Called on initial lock and again after display changes rebuild the windows.
+    private func setupPasswordOverlay() {
+        guard let mainVC = lockWindowController.mainViewController,
+              let window = mainVC.view.window else { return }
+
+        // Remove old overlay if it's attached to a different view hierarchy
+        passwordOverlay?.removeFromSuperview()
+
+        let overlay = PasswordOverlayView(frame: window.frame)
+        overlay.isHidden = true
+        overlay.onUnlock = { [weak self] in
+            self?.exitLockMode()
+        }
+        overlay.onCancel = { [weak self] in
+            self?.dismissPasswordOverlay()
+        }
+        mainVC.view.addSubview(overlay)
+        overlay.frame = mainVC.view.bounds
+        overlay.autoresizingMask = [.width, .height]
+        passwordOverlay = overlay
+
+        eventBus.onPasswordEvent = { [weak overlay] event in
+            overlay?.handleKeyEvent(event)
+        }
     }
 
     // MARK: - Exit Shortcut Handling

@@ -13,6 +13,7 @@ def make_id(name):
 sources = [
     ("App/main.swift", "main.swift"),
     ("App/AppDelegate.swift", "AppDelegate.swift"),
+    ("App/UpdateManager.swift", "UpdateManager.swift"),
     ("InputBlocking/EventTapManager.swift", "EventTapManager.swift"),
     ("InputBlocking/ExitShortcutDetector.swift", "ExitShortcutDetector.swift"),
     ("InputBlocking/InputEvent.swift", "InputEvent.swift"),
@@ -39,7 +40,7 @@ sources = [
 
 # Groups
 groups = {
-    "App": ["App/main.swift", "App/AppDelegate.swift"],
+    "App": ["App/main.swift", "App/AppDelegate.swift", "App/UpdateManager.swift"],
     "InputBlocking": [
         "InputBlocking/EventTapManager.swift",
         "InputBlocking/ExitShortcutDetector.swift",

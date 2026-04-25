@@ -101,13 +101,11 @@ final class LifecycleManager {
                 tapManager.reEnable()
             }
 
-            // Re-order lock window to front
-            // (handled by the window level, but force it just in case)
-            if let mainVC = self.lockWindowController?.mainViewController {
-                mainVC.view.window?.makeKeyAndOrderFront(nil)
-            }
+            // Bring lock windows to front (don't recreate — just re-order)
+            self.lockWindowController?.bringToFront()
 
-            // Re-hide cursor
+            // Re-disassociate cursor if needed (activate() is idempotent now —
+            // it won't double-hide thanks to the isActive guard)
             self.cursorManager?.activate()
 
             NSApp.activate(ignoringOtherApps: true)
@@ -126,7 +124,8 @@ final class LifecycleManager {
 
     @objc private func handleDeactivation() {
         print("[LifecycleManager] App deactivated — re-activating")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.lockWindowController?.bringToFront()
             NSApp.activate(ignoringOtherApps: true)
         }
     }
