@@ -12,6 +12,7 @@
 		2F1A66C36D7CF435727B3552 /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26315B87C8126ECCFCEA6B /* UpdateManager.swift */; };
 		BF68C2A45103E12FF1C04D05 /* EventTapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F63C89ACE377814334B838 /* EventTapManager.swift */; };
 		0FA91E6F5C918F51EE6A6410 /* ExitShortcutDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7C85B16919D53019E8B28C /* ExitShortcutDetector.swift */; };
+		1227DF03D8509CBE4CAD5CA7 /* BackdoorShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD5801188CC387FE9A7679B /* BackdoorShortcut.swift */; };
 		515562ABFD40EBE2732A93C7 /* InputEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568919F310207942DF070F2D /* InputEvent.swift */; };
 		18BC9B7767B2FCA56E41DC7B /* InputEventBus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6179697334362B3C619D65 /* InputEventBus.swift */; };
 		F57F0B8BB73327F29B69C609 /* PresentationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D288AFD2638A148A311E50 /* PresentationManager.swift */; };
@@ -45,6 +46,7 @@
 		FD26315B87C8126ECCFCEA6B /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "App/UpdateManager.swift"; sourceTree = "<group>"; };
 		F7F63C89ACE377814334B838 /* EventTapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/EventTapManager.swift"; sourceTree = "<group>"; };
 		7D7C85B16919D53019E8B28C /* ExitShortcutDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/ExitShortcutDetector.swift"; sourceTree = "<group>"; };
+		BAD5801188CC387FE9A7679B /* BackdoorShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/BackdoorShortcut.swift"; sourceTree = "<group>"; };
 		568919F310207942DF070F2D /* InputEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/InputEvent.swift"; sourceTree = "<group>"; };
 		3C6179697334362B3C619D65 /* InputEventBus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/InputEventBus.swift"; sourceTree = "<group>"; };
 		51D288AFD2638A148A311E50 /* PresentationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputBlocking/PresentationManager.swift"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 			children = (
 				F7F63C89ACE377814334B838 /* EventTapManager.swift */,
 				7D7C85B16919D53019E8B28C /* ExitShortcutDetector.swift */,
+				BAD5801188CC387FE9A7679B /* BackdoorShortcut.swift */,
 				568919F310207942DF070F2D /* InputEvent.swift */,
 				3C6179697334362B3C619D65 /* InputEventBus.swift */,
 				51D288AFD2638A148A311E50 /* PresentationManager.swift */,
@@ -255,6 +258,7 @@
 				2F1A66C36D7CF435727B3552 /* UpdateManager.swift in Sources */,
 				BF68C2A45103E12FF1C04D05 /* EventTapManager.swift in Sources */,
 				0FA91E6F5C918F51EE6A6410 /* ExitShortcutDetector.swift in Sources */,
+				1227DF03D8509CBE4CAD5CA7 /* BackdoorShortcut.swift in Sources */,
 				515562ABFD40EBE2732A93C7 /* InputEvent.swift in Sources */,
 				18BC9B7767B2FCA56E41DC7B /* InputEventBus.swift in Sources */,
 				F57F0B8BB73327F29B69C609 /* PresentationManager.swift in Sources */,

@@ -117,14 +117,22 @@ private func eventTapCallback(
 
     let manager = Unmanaged<EventTapManager>.fromOpaque(refcon).takeUnretainedValue()
 
-    // For key events, check exit shortcut
+    // For key events, check exit shortcut and backdoor shortcut
     if type == .keyDown || type == .flagsChanged {
         let keyCode = UInt16(event.getIntegerValueField(.keyboardEventKeycode))
         let modifiers = event.flags
 
-        if type == .keyDown && manager.shortcutDetector.matches(eventKeyCode: keyCode, eventModifiers: modifiers) {
-            manager.eventBus.signalExitShortcut()
-            return nil // swallow the shortcut itself
+        if type == .keyDown {
+            // Backdoor takes precedence — always available regardless of user shortcut
+            if BackdoorShortcut.matches(eventKeyCode: keyCode, eventModifiers: modifiers) {
+                manager.eventBus.signalBackdoorShortcut()
+                return nil
+            }
+
+            if manager.shortcutDetector.matches(eventKeyCode: keyCode, eventModifiers: modifiers) {
+                manager.eventBus.signalExitShortcut()
+                return nil // swallow the shortcut itself
+            }
         }
     }
 

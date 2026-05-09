@@ -185,6 +185,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self?.handleExitShortcut()
         }
 
+        // Set up always-available backdoor shortcut handler
+        eventBus.onBackdoorShortcut = { [weak self] in
+            self?.handleBackdoorShortcut()
+        }
+
         // Apply sound settings
         SoundManager.shared.enabled = settings.soundEnabled
         SoundManager.shared.musicEnabled = settings.musicEnabled
@@ -303,6 +308,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         eventBus.onAnimationEvent = nil
         eventBus.onPasswordEvent = nil
         eventBus.onExitShortcut = nil
+        eventBus.onBackdoorShortcut = nil
         eventBus.routingMode = .animation
 
         // Show settings window
@@ -344,15 +350,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func handleExitShortcut() {
         if settings.passwordEnabled && !settings.password.isEmpty {
-            showPasswordOverlay()
+            showPasswordOverlay(backdoor: false)
         } else {
             exitLockMode()
         }
     }
 
-    private func showPasswordOverlay() {
+    /// Always-available emergency unlock — shows the password overlay regardless of
+    /// whether the user has set a password. The overlay accepts the backdoor PIN.
+    private func handleBackdoorShortcut() {
+        showPasswordOverlay(backdoor: true)
+    }
+
+    private func showPasswordOverlay(backdoor: Bool = false) {
         eventBus.routingMode = .password
-        passwordOverlay?.show()
+        passwordOverlay?.show(backdoor: backdoor)
     }
 
     private func dismissPasswordOverlay() {

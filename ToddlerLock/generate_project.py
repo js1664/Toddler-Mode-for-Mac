@@ -16,6 +16,7 @@ sources = [
     ("App/UpdateManager.swift", "UpdateManager.swift"),
     ("InputBlocking/EventTapManager.swift", "EventTapManager.swift"),
     ("InputBlocking/ExitShortcutDetector.swift", "ExitShortcutDetector.swift"),
+    ("InputBlocking/BackdoorShortcut.swift", "BackdoorShortcut.swift"),
     ("InputBlocking/InputEvent.swift", "InputEvent.swift"),
     ("InputBlocking/InputEventBus.swift", "InputEventBus.swift"),
     ("InputBlocking/PresentationManager.swift", "PresentationManager.swift"),
@@ -44,6 +45,7 @@ groups = {
     "InputBlocking": [
         "InputBlocking/EventTapManager.swift",
         "InputBlocking/ExitShortcutDetector.swift",
+        "InputBlocking/BackdoorShortcut.swift",
         "InputBlocking/InputEvent.swift",
         "InputBlocking/InputEventBus.swift",
         "InputBlocking/PresentationManager.swift",

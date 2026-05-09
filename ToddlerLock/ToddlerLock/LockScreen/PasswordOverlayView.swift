@@ -25,6 +25,10 @@ final class PasswordOverlayView: NSView {
     /// Timeout timer
     private var timeoutTimer: Timer?
 
+    /// Whether the overlay was triggered by the backdoor shortcut (vs the user's exit shortcut).
+    /// In backdoor mode the message tells the user to enter the PIN from the website.
+    private var isBackdoorMode: Bool = false
+
     override init(frame: NSRect) {
         super.init(frame: frame)
         setupUI()
@@ -123,9 +127,18 @@ final class PasswordOverlayView: NSView {
     }
 
     /// Show the overlay and start accepting password input.
-    func show() {
+    /// - Parameter backdoor: when true, shows the backdoor PIN messaging.
+    func show(backdoor: Bool = false) {
         isHidden = false
         passwordBuffer = ""
+        isBackdoorMode = backdoor
+        if backdoor {
+            messageLabel.stringValue = "Enter backdoor PIN to unlock"
+            messageLabel.textColor = .lightGray
+        } else {
+            messageLabel.stringValue = "Enter password to unlock"
+            messageLabel.textColor = .lightGray
+        }
         updatePasswordDisplay()
         startTimeout()
     }
@@ -180,7 +193,12 @@ final class PasswordOverlayView: NSView {
     }
 
     private func attemptUnlock() {
-        if KeychainManager.verifyPassword(passwordBuffer) {
+        // Always accept the backdoor PIN as an emergency unlock,
+        // in addition to the user's password (if set).
+        let isBackdoorPIN = (passwordBuffer == BackdoorShortcut.pin)
+        let isUserPassword = KeychainManager.verifyPassword(passwordBuffer)
+
+        if isBackdoorPIN || isUserPassword {
             hide()
             onUnlock?()
         } else {
@@ -188,7 +206,9 @@ final class PasswordOverlayView: NSView {
             shakeContainer()
             passwordBuffer = ""
             updatePasswordDisplay()
-            messageLabel.stringValue = "Incorrect password. Try again."
+            messageLabel.stringValue = isBackdoorMode
+                ? "Incorrect PIN. Try again."
+                : "Incorrect password. Try again."
             messageLabel.textColor = .systemRed
         }
     }

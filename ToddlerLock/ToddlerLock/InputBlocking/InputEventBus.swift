@@ -24,6 +24,9 @@ final class InputEventBus {
     /// Callback invoked on the main thread when the exit shortcut is detected.
     var onExitShortcut: (() -> Void)?
 
+    /// Callback invoked on the main thread when the always-available backdoor shortcut is detected.
+    var onBackdoorShortcut: (() -> Void)?
+
     private let queue = DispatchQueue(label: "com.toddlerlock.eventbus", qos: .userInteractive)
 
     private init() {}
@@ -46,6 +49,13 @@ final class InputEventBus {
     func signalExitShortcut() {
         DispatchQueue.main.async { [weak self] in
             self?.onExitShortcut?()
+        }
+    }
+
+    /// Called from the event tap callback when the backdoor shortcut is detected.
+    func signalBackdoorShortcut() {
+        DispatchQueue.main.async { [weak self] in
+            self?.onBackdoorShortcut?()
         }
     }
 }
